@@ -1,0 +1,11 @@
+driving license website name fields
+
+form_rcdl:tf_dlNO 
+form_rcdl:tf_dob_input
+form_rcdl:j_idt33:CaptchaID
+
+driving license - DL-0420110149646
+dob - 09-02-1976
+url - https://parivahan.gov.in/rcdlstatus/?pur_cd=101
+
+
