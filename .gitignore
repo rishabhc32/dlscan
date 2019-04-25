@@ -1,5 +1,4 @@
 output.html
-.vscode/.ropeproject/objectdb
-__pycache__/dlinfo.cpython-37.pyc
-.vscode/.ropeproject/config.py
-__pycache__/dlparser.cpython-37.pyc
+__pycache__
+.vscode
+trial
