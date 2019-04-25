@@ -24,6 +24,8 @@ python dlscan.py DL-0420110149646 09-02-1976 --output-file file.json
 ```
 __Note:__ It will ask you to enter captcha manually by showing you the captcha image. When it asks, enter the captcha on terminal.
 
+__Note:__ This uses python `pillow/PIL` library for displaying captcha on GUI. So ensure that `PIL` is installed. Run `pip install pillow`.
+
 ![captcha image](images/captcha.png)
 
 ### Inserting custom `get_captcha()` function
