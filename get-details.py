@@ -24,6 +24,7 @@ def get_license_details(details_html_table):
 
     return ouput_json
 
+
 def get_validity_details(validity_html_table):
     details_html = validity_html_table.xpath("./tr")
     ouput_json = {'transport': {}, 'non-transport': {}}
@@ -33,10 +34,13 @@ def get_validity_details(validity_html_table):
     ouput_json['non-transport']['to'] = non_transport_html[2].text_content().strip()[4:]
 
     transport_html = details_html[1].xpath("./td")
-    ouput_json['transport']['from'] = transport_html[1].text_content().strip()[6:]
-    ouput_json['transport']['to'] = transport_html[2].text_content().strip()[4:]
+    ouput_json['transport']['from'] = transport_html[1].text_content().strip()[
+        6:]
+    ouput_json['transport']['to'] = transport_html[2].text_content().strip()[
+        4:]
 
     return ouput_json
+
 
 def get_hazardous_detail(hazordous_detail_html):
     details_html = hazordous_detail_html.xpath("./tr/td")
@@ -46,6 +50,7 @@ def get_hazardous_detail(hazordous_detail_html):
     ouput_json['hill-valid-till'] = details_html[3].text_content().strip()
 
     return ouput_json
+
 
 def get_class_detail(class_detail_html):
     table_body = class_detail_html.xpath("./tbody/tr")
@@ -61,20 +66,21 @@ def get_class_detail(class_detail_html):
         }
 
         output_json.append(one_row_detail)
-    
+
     return output_json
+
 
 def extract_details(input_html):
     ouput_json = {}
 
     html = input_html.xpath("/div/span/div/div/div/div/div")[0]
-    
+
     license_num = html.xpath("./div")[0]
     license_text = license_num.text_content().strip()
     license_text_index = license_text.find('DL')
     license_no = license_text[license_text_index:]
     ouput_json['license_no'] = license_no
-    
+
     details_html = html.xpath("./table")
 
     license_details_json = get_license_details(details_html[0])
@@ -92,7 +98,7 @@ def extract_details(input_html):
         'Class-of-vehicle-details': class_detail_list
     }
     ouput_json.update(class_detail_json)
-    
+
     ouput_json
 
 
@@ -107,6 +113,7 @@ def get_details(input_html):
     clean_html = cleaner.clean_html(html_tree)
 
     extract_details(clean_html)
+
 
 if __name__ == '__main__':
     input_html = True
