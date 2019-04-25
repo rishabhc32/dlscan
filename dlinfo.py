@@ -1,8 +1,9 @@
 import lxml.html
 import requests
 import requests.exceptions as RequestsException
-from dlparser import DetailsParser
 from PIL import Image
+
+from dlparser import DetailsParser
 
 
 class ExtractInfo:
@@ -68,20 +69,21 @@ class ExtractInfo:
 
         except RequestsException.ConnectionError:
             print("Error: Network Problem")
+            return None
 
         except RequestsException.Timeout:
             print("Error: Connection timeout")
+            return None
 
         except RequestsException.HTTPError as err:
             print("Error:", err)
-
-       
+            return None
 
     def extract(self):
         res_details_str = self.__getpage()
 
         if res_details_str == None:
-            return
+            return None
 
         detail_parser = DetailsParser(res_details_str)
         details = detail_parser.getdetails()
