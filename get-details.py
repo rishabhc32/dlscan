@@ -5,6 +5,7 @@ import lxml
 from lxml import etree, html
 from lxml.html.clean import Cleaner
 
+
 def get_license_details(details_html_table):
     details_html = details_html_table.xpath("./tr")
     ouput_json = {}
@@ -47,7 +48,21 @@ def get_hazardous_detail(hazordous_detail_html):
     return ouput_json
 
 def get_class_detail(class_detail_html):
+    table_body = class_detail_html.xpath("./tbody/tr")
+    output_json = []
+
+    for detail_rows in table_body:
+        details = detail_rows.xpath("./td")
+
+        one_row_detail = {
+            'COV-Category': details[0].text_content(),
+            'Class-of-Vehicle': details[1].text_content(),
+            'COV-issue-date': details[2].text_content()
+        }
+
+        output_json.append(one_row_detail)
     
+    return output_json
 
 def extract_details(input_html):
     ouput_json = {}
@@ -72,7 +87,10 @@ def extract_details(input_html):
     ouput_json.update(hazard_detail_json)
 
     class_detail_html = html.xpath("./div/div/table")[0]
-    class_detail_json = get_class_detail(class_detail_html)
+    class_detail_list = get_class_detail(class_detail_html)
+    class_detail_json = {
+        'Class-of-vehicle-details': class_detail_list
+    }
     ouput_json.update(class_detail_json)
     
     ouput_json
