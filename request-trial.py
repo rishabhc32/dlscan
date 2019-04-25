@@ -7,7 +7,7 @@ BASE_URL = 'https://parivahan.gov.in'
 URL = 'https://parivahan.gov.in/rcdlstatus/?pur_cd=101'
 DL_NO = 'DL-0420110149646'
 DOB = '09-02-1976'
-CAPTCH_IMG_ID = 'form_rcdl:j_idt33:j_idt39'
+CAPTCH_IMG_ID = 'form_rcdl:j_idt34:j_idt39'
 
 with requests.Session() as session:
     first_response = session.get(URL)
@@ -30,7 +30,7 @@ with requests.Session() as session:
 
     payload['form_rcdl:tf_dlNO'] = DL_NO
     payload['form_rcdl:tf_dob_input'] = DOB
-    payload['form_rcdl:j_idt33:CaptchaID'] = captcha_text
+    payload['form_rcdl:j_idt34:CaptchaID'] = captcha_text
     payload['javax.faces.partial.ajax'] = 'true'
     payload['javax.faces.source'] = 'form_rcdl:j_idt44'
     payload['javax.faces.partial.execute'] = '@all'
