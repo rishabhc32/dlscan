@@ -1,4 +1,5 @@
 import os
+import pprint
 from io import StringIO
 
 import lxml
@@ -34,10 +35,8 @@ def get_validity_details(validity_html_table):
     ouput_json['non-transport']['to'] = non_transport_html[2].text_content().strip()[4:]
 
     transport_html = details_html[1].xpath("./td")
-    ouput_json['transport']['from'] = transport_html[1].text_content().strip()[
-        6:]
-    ouput_json['transport']['to'] = transport_html[2].text_content().strip()[
-        4:]
+    ouput_json['transport']['from'] = transport_html[1].text_content().strip()[6:]
+    ouput_json['transport']['to'] = transport_html[2].text_content().strip()[4:]
 
     return ouput_json
 
@@ -99,7 +98,7 @@ def extract_details(input_html):
     }
     ouput_json.update(class_detail_json)
 
-    ouput_json
+    return ouput_json
 
 
 def get_details(input_html):
@@ -112,7 +111,7 @@ def get_details(input_html):
                       inline_style=True, remove_unknown_tags=True)
     clean_html = cleaner.clean_html(html_tree)
 
-    extract_details(clean_html)
+    return extract_details(clean_html)
 
 
 if __name__ == '__main__':
@@ -121,4 +120,7 @@ if __name__ == '__main__':
     with open('output.html', 'r') as input_file:
         input_html = input_file.read()
 
-    get_details(input_html)
+    extracted_details = get_details(input_html)
+
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(extracted_details)
